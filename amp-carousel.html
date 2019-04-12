@@ -117,11 +117,22 @@
       }
     </script>
   </amp-state>
+  <amp-state id="practiceAreaSelect">
+    <script type="application/json">
+      {
+        "practiceId": 0
+      }
+    </script>
+  </amp-state>
+  
   <amp-state id="practiceAreaSelect" src="https://validate-form.getsandbox.com/getRoutingQuestion?pid=QUERY_PARAM(pid)" data-amp-replace="CLIENT_ID QUERY_PARAM">
   </amp-state>
   <div class="overlay" [class]="noloPath.step < 0 ? 'overlay' : 'hidden'">
     <div>
-      <span on="tap:AMP.setState({noloPath: {step: practiceAreaSelect.routingQuestionOptions.length > 0 ? 1 : 1}})" tabindex=99999 role="start">CLICK HERE TO START NOLO LEAD PATH</span>
+      <p>
+        We've helped 205 clients find attorneys today.
+      </p>
+      <span class="button" on="tap:AMP.setState({noloPath: {step: practiceAreaSelect.routingQuestionOptions.length > 0 ? 1 : 1}})" tabindex=99999 role="start">Continue</span>
     </div>
   </div>
   <!--<div [class]="noloPath.step == 0 ? '' : 'hidden'" class="practice_area_select">
