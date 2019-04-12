@@ -133,7 +133,7 @@
     <div [text]="'Step ' + noloPath.step + '/' + (questions.length + 1)"></div>
     <hr>
     <fieldset [class]="noloPath.step <= questions.length ? '' : 'hidden'">
-      <amp-list id="noloPathQuestions" layout="fixed-height" height=300 [height]="(questions[noloPath.step-1].answer.length > 0 ? (questions[noloPath.step-1].answer.length * 60 + 20) : 100)" [src]="questions">
+      <amp-list id="noloPathQuestions" layout="fixed-height" height=450 [height]="(questions[noloPath.step-1].answer.length > 0 ? (questions[noloPath.step-1].answer.length * 60 + 20) : 100)" [src]="questions">
         <template type="amp-mustache">
           <div data-step="{{step_idx}}" class="form-question-item question_step_{{step_idx}} {{validation}} hidden" [class]="(noloPath.step == {{step_idx}} ? '' : 'hidden ') + 'form-question-item question_step_{{step_idx}}'">
             <label class="form-question-label">{{question}}</label><br>
