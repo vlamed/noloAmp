@@ -22,7 +22,11 @@
       margin: 1rem;
     }
     .hidden {
-      display:none !important;
+      top: 0;
+      position:absolute;
+      transform: translateX(-700px);
+      opacity: 0.0;
+      
     }
     fieldset {
       border: none;
@@ -35,6 +39,10 @@
       top: 0;
       left: 0;
       width: 100%;
+      opacity: 1.0;
+      
+      transition: transform 1s, opacity 1s;
+      transition-delay: display 1s;
     }
     .button {
       background: orange;
@@ -109,10 +117,10 @@
   </amp-state>
   <div class="overlay" [class]="noloPath.step < 0 ? 'overlay' : 'hidden'">
     <div>
-      <span on="tap:AMP.setState({noloPath: {step: practiceAreaSelect.routingQuestionOptions.length > 0 ? 0 : 1}})" tabindex=99999 role="start">CLICK HERE TO START NOLO LEAD PATH</span>
+      <span on="tap:AMP.setState({noloPath: {step: practiceAreaSelect.routingQuestionOptions.length > 0 ? 1 : 1}})" tabindex=99999 role="start">CLICK HERE TO START NOLO LEAD PATH</span>
     </div>
   </div>
-  <div [class]="noloPath.step == 0 ? '' : 'hidden'" class="practice_area_select">
+  <!--<div [class]="noloPath.step == 0 ? '' : 'hidden'" class="practice_area_select">
     <label [text]="practiceAreaSelect.routingQuestion">.</label>
     <amp-list id="routingOption" layout="fixed-height" height=100 [src]="practiceAreaSelect" single-item>
       <template type="amp-mustache">
@@ -122,13 +130,10 @@
             <option value="{{value}}">{{name}}</option>
           {{/routingQuestionOptions}}
         </select>
-	{{#routingQuestionOptions}}
-            <a class="button" href="https://google.com">{{name}}</a>
-          {{/routingQuestionOptions}}
       </template>
     </amp-list>
   </div>
-
+-->
   <amp-state id="questions" [src]="'https://validate-form.getsandbox.com/getQuestions?pid=' + practiceAreaSelect.practiceId">
   </amp-state>
 
