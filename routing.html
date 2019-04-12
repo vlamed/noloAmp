@@ -1,0 +1,126 @@
+<!doctype html>
+<html ⚡>
+<head>
+  <meta charset="utf-8">
+  <title>Nolo Lead Path R&D</title>
+  <link rel="canonical" href="/index.html" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+  <style amp-custom>
+    body {
+      background-color: #efefef;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-family: sans-serif;
+    }
+    h1, h2 {
+      margin: 1rem;
+    }
+    .hidden {
+      display:none !important;
+    }
+    fieldset {
+      border: none;
+      position: relative;
+      padding: 0;
+      margin: 0;
+    }
+    #noloPathQuestions div[role=listitem]{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .button {
+      background: orange;
+      color: white;
+      padding: 10px 20px;
+	}
+    .button.question-answer {
+      background: white;
+      color: black;
+      border: lightgray solid 2px;
+      
+    }
+    .button.btn-submit {
+      background: deepskyblue;
+      border: none;
+      text-transform: uppercase;
+      width: 100%;
+    }
+    .form-question-item ul {
+      padding: 0;
+      width: 100%;
+    }
+    .form-question-item li {
+      width: 100%;
+      list-style: none;
+      margin-bottom: 10px;
+    }
+    .form-question-item li div {
+      text-align: center;
+    }
+    .form-question-item .form-textarea {
+      width: 98%;
+    }
+    .form-question-item .form-input {
+      margin-top: 20px;
+      height: 25px;
+    }
+    .contact-form input {
+      width: 99%;
+      height: 25px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+    select {
+	  padding: 10px 20px;
+      border-color: darkgrey;
+      background-color: white;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #dfdfdf;
+      text-align: center;
+      color: orange;
+      font-weight: bold;
+    }
+  </style>
+
+</head>
+<body>
+  <amp-state id="noloPath">
+    <script type="application/json">
+      {
+        "step": -1
+      }
+    </script>
+  </amp-state>
+  <amp-state id="practiceAreaSelect" src="https://validate-form.getsandbox.com/getRoutingQuestion?pid=QUERY_PARAM(pid)" data-amp-replace="CLIENT_ID QUERY_PARAM">
+  </amp-state>
+  <div class="overlay" [class]="noloPath.step < 0 ? 'overlay' : 'hidden'">
+    <div>
+      <span on="tap:AMP.setState({noloPath: {step: practiceAreaSelect.routingQuestionOptions.length > 0 ? 0 : 1}})" tabindex=99999 role="start">CLICK HERE TO START NOLO LEAD PATH</span>
+    </div>
+  </div>
+  <div [class]="noloPath.step == 0 ? '' : 'hidden'" class="practice_area_select">
+    <label [text]="practiceAreaSelect.routingQuestion">.</label>
+    <amp-list id="routingOption" layout="fixed-height" height=100 [src]="practiceAreaSelect" single-item>
+      <template type="amp-mustache">
+	{{#routingQuestionOptions}}
+            <a class="button" on="tap:nolo-lead">{{name}}</a>
+          {{/routingQuestionOptions}}
+      </template>
+    </amp-list>
+  </div>
+</body>
+</html>
