@@ -109,22 +109,18 @@
   </amp-state>
   <div class="overlay" [class]="noloPath.step < 0 ? 'overlay' : 'hidden'">
     <div>
-      <span on="tap:AMP.setState({noloPath: {step: practiceAreaSelect.routingQuestion.length > 0 ? 0 : 1}})" tabindex=99999 role="start">CLICK HERE TO START NOLO LEAD PATH</span>
+      <span on="tap:AMP.setState({noloPath: {step: practiceAreaSelect.routingQuestionOptions.length > 0 ? 0 : 1}})" tabindex=99999 role="start">CLICK HERE TO START NOLO LEAD PATH</span>
     </div>
   </div>
-  <!-- <h2> -->
-    <!-- Damages: How Much is a Personal Injury Case Worth? -->
-  <!-- </h2> -->
-  <!-- <hr /> -->
   <div [class]="noloPath.step == 0 ? '' : 'hidden'" class="practice_area_select">
-    <label>Did the injury occur at work?</label>
+    <label [text]="practiceAreaSelect.routingQuestion">.</label>
     <amp-list id="routingOption" layout="fixed-height" height=100 [src]="practiceAreaSelect" single-item>
       <template type="amp-mustache">
-        <select name="practice_id" class="" [class]="practiceAreaSelect.routingQuestion.length > 0 ? '' : 'hidden'" on="change:AMP.setState({practiceAreaSelect: {practiceId: event.value},noloPath: {step: 1}})">
+        <select name="practice_id" class="" [class]="practiceAreaSelect.routingQuestionOptions.length > 0 ? '' : 'hidden'" on="change:AMP.setState({practiceAreaSelect: {practiceId: event.value},noloPath: {step: 1}})">
           <option value="0" selected="selected">--Select an answer--</option>
-          {{#routingQuestion}}
+          {{#routingQuestionOptions}}
             <option value="{{value}}">{{name}}</option>
-          {{/routingQuestion}}
+          {{/routingQuestionOptions}}
         </select>
       </template>
     </amp-list>
