@@ -22,11 +22,17 @@
       margin: 1rem;
     }
     .hidden {
+      display: none;
+    }
+    .past-question {
       top: 0;
       position:absolute;
-      transform: translateX(-700px);
-      opacity: 0.0;
-      
+      transform: translateX(-110%);
+    }
+    .next-question {
+      top: 0;
+      position:absolute;
+      transform: translateX(110%);
     }
     fieldset {
       border: none;
@@ -39,10 +45,8 @@
       top: 0;
       left: 0;
       width: 100%;
-      opacity: 1.0;
       
-      transition: transform 1s, opacity 1s;
-      transition-delay: display 1s;
+      transition: transform 1s;
     }
     .button {
       background: orange;
@@ -138,12 +142,12 @@
   </amp-state>
 
   <form method="GET" custom-validation-reporting="show-all-on-submit" action="https://validate-form.getsandbox.com/validate_form" action-xhr="https://validate-form.getsandbox.com/validate_form" target="_blank" [class]="practice_id_selected != 0 ? 'noloPath-form' : 'hidden'" class="hidden">
-    <div [text]="'Step ' + noloPath.step + '/' + (questions.length + 1)"></div>
+    <div [text]="'Step ' + noloPath.step + '/' + (questions.length)"></div>
     <hr>
     <fieldset [class]="noloPath.step <= questions.length ? '' : 'hidden'">
       <amp-list id="noloPathQuestions" layout="fixed-height" height=450 [height]="(questions[noloPath.step-1].answer.length > 0 ? (questions[noloPath.step-1].answer.length * 60 + 20) : 100)" [src]="questions">
         <template type="amp-mustache">
-          <div data-step="{{step_idx}}" class="form-question-item question_step_{{step_idx}} {{validation}} hidden" [class]="(noloPath.step == {{step_idx}} ? '' : 'hidden ') + 'form-question-item question_step_{{step_idx}}'">
+          <div data-step="{{step_idx}}" class="form-question-item question_step_{{step_idx}} {{validation}} hidden" [class]="(noloPath.step > {{step_idx}} ? 'past-question ' : '') + (noloPath.step < {{step_idx}} ? 'next-question ' : '') + 'form-question-item question_step_{{step_idx}}'">
             <label class="form-question-label">{{question}}</label><br>
             {{#is_select}}
               <ul>
@@ -186,17 +190,11 @@
         </template>
       </amp-list>
 
-      <span class="hidden" [class]="noloPath.step == questions.length ? 'button' : 'hidden'" role="continue" tabindex="99" on="tap:AMP.setState({noloPath: {step: questions.length + 1}})">Get FREE evaluation</span>
+      <!--<span class="hidden" [class]="noloPath.step == questions.length ? 'button' : 'hidden'" role="continue" tabindex="99" on="tap:AMP.setState({noloPath: {step: questions.length + 1}})">Get FREE evaluation</span>-->
     </fieldset>
-    <div class="hidden" [class]="questions.length > 0 && noloPath.step == questions.length + 1 ? 'contact-form' : 'hidden'">
-      <input placeholder="First Name" name="first_name">
-      <input placeholder="Last Name" name="last_name">
-      <input placeholder="Email Address" name="mail">
-      <input placeholder="Phone Number" name="phone">
-    </div>
     <br>
-    <div [class]="noloPath.step > 1 && (noloPath.step <= questions.length+1) ? '' : 'hidden'" role="back" tabindex="99" class="hidden" on="tap:AMP.setState({noloPath:{step: noloPath.step - 1}})">Back</div><br>
-    <input type="submit" value="Submit" class="hidden" [class]="questions.length > 0 && noloPath.step == questions.length + 1 ? 'button btn-submit' : 'hidden'">
+    <div [class]="noloPath.step > 1 && (noloPath.step <= questions.length) ? '' : 'hidden'" role="back" tabindex="99" class="hidden" on="tap:AMP.setState({noloPath:{step: noloPath.step - 1}})">Back</div><br>
+    <input type="submit" value="Submit" class="hidden" [class]="questions.length > 0 && noloPath.step == questions.length ? 'button btn-submit' : 'hidden'">
     <div submit-success>
       <template type="amp-mustache">
         Submit successful {{status}}
