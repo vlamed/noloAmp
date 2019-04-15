@@ -29,11 +29,13 @@
       top: 0;
       position:absolute;
       transform: translateX(-110%);
+      opacity: 0;
     }
     .next-question {
       top: 0;
       position:absolute;
       transform: translateX(110%);
+      opacity: 0;
     }
     fieldset {
       border: none;
@@ -46,8 +48,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      
-      transition: transform 1s;
+      transition: transform 1s, opacity: 0.3s;
     }
     .button {
       background: orange;
